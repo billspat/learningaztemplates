@@ -11,6 +11,8 @@ export DEBIAN_FRONTEND=noninteractive
 # install the LAMP stack
 apt-get -y install apache2 php5 
 
+mkdir -p /var/www/html/
+
 # write some PHP
 echo \<center\>\<h1\>My Demo App\</h1\>\<br/\>\</center\> > /var/www/html/index.php
 echo "<p>Passed Variable = $passed_var" >> /var/www/html/index.php
