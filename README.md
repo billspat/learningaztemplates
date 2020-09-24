@@ -16,5 +16,26 @@ The following are the original "deploy to azure" buttons for the lamp-app, using
 ```
 
 
+Other quick-starts worth looking into
+---
 
+Linux VM with an Java app installed:
+
+https://github.com/Azure/azure-quickstart-templates/tree/master/101-Linux-Java-ZuluOpenJDK
+
+
+Linux with whole desktop installed: 
+
+https://github.com/Azure/azure-quickstart-templates/tree/master/101-ubuntu-mate-desktop-vscode
+
+Container instance: 
+
+https://github.com/Azure/azure-quickstart-templates/tree/master/101-aci-linuxcontainer-public-ip
+
+No script added but can pull a docker container, which may be even better than a script for some applications
+
+
+**network security group:**   create one group that may be shared among other resources
+
+https://github.com/Azure/azure-quickstart-templates/tree/master/101-security-group-create
 
