@@ -28,5 +28,5 @@ fi
 az deployment group create \
   --name TestUbuntuDeployment \
   --resource-group ${RG} \
-  --template-file azuredeploy.json \
+  --template-file linuxvm_deploy2.json \
   --parameters @${TFILE}

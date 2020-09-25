@@ -1,24 +1,20 @@
 #!/bin/bash
-
-
-# set up a silent install of MySQL
 passed_var=$1
 
-# echo "deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran40/" >> /etc/apt/sources.list 
-# apt-get -y update
-# apt-get install r-base r-base-dev
-# export DEBIAN_FRONTEND=noninteractive
-# echo mysql-server-5.6 mysql-server/root_password password $dbpass | debconf-set-selections
-# echo mysql-server-5.6 mysql-server/root_password_again password $dbpass | debconf-set-selections
 
-# install the LAMP stack
-apt-get -y install apache2  
+echo "script argument is $passed_var"
 
-# mkdir -p /var/www/html/ 
+ apt-get update
+ apt-get -y --no-install-recommends install dirmngr gnupg software-properties-common
+ apt-get -y dist-upgrade
+ 
+ apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0x219BD9C9
+ # apt-add-repository "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/"
+ 
+ apt-get update
+ apt-get -y --no-install-recommends install apache2
+ rm -rf /var/lib/apt/lists/*
 
-# # write some PHP
-# echo \<center\>\<h1\>My Demo App\</h1\>\<br/\>\</center\> > /var/www/html/index.php
-# echo "<p>Passed Variable = $passed_var" >> /var/www/html/index.php
-# echo \<\?php phpinfo\(\)\; \?\> >> /var/www/html/index.php
+ echo "echo VM created via azure template" >> /etc/bash.bashrc
 
-apachectl restart
+
