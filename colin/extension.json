@@ -1,0 +1,25 @@
+{ 
+  "name": "config-app",
+  "type": "extensions",
+  "location": "[resourceGroup().location]",
+  "apiVersion": "2019-03-01",
+  "dependsOn": [
+    "[concat('Microsoft.Compute/virtualMachines/', concat(variables('vmName'),copyindex()))]"
+  ],
+  "tags": {
+    "displayName": "config-app"
+  },
+  "properties": {
+    "publisher": "Microsoft.Azure.Extensions",
+    "type": "CustomScript",
+    "typeHandlerVersion": "2.1",
+    "autoUpgradeMinorVersion": true,
+    "settings": {
+      },
+    "protectedSettings": {
+      "commandToExecute" : "sh azrunr_script.sh",
+      "fileUris": ["GITHUBURLHERE"],
+      "managedIdentity": {}
+    }
+  }
+}

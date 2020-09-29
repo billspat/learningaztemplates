@@ -1,0 +1,60 @@
+USING scriptvm Templates
+----
+
+Colin William Sept 28 2029
+
+
+This is a documentation for the multiple json files that are needed to run Azure VM deployment using
+Azure Templates. This includes launching a base VM, then launching Custom Script Extensions that allow us to run
+some Linux shell (.sh) scripts to install R and RStudio.
+
+Launching a VM:
+To start, we will launch a VM using the template.
+The file VMtemplate.json contains a template to launch a VM. The file VMtemplate.parameters.json includes the parameters
+we are using with that VM launch. Using the Azure CLI, (elaborate) the command "az deployment group create --resource-group rg --template-file VMtemplate.json --parameters VMtemplate.parameters.json"
+can be used to launch the VM within the provided resource group.
+
+Once the deployment is complete, navigate to the Azure Portal to ensure your VM has been provisioned.
+
+Launching Script Extensions:
+In its simplest form, a script can be run on a VM as long as the shell script resides within a storage account on the Azure Portal
+The extensionscript.json includes the minimum fields needed to run a script this way. 
+
+
+
+
+NOTE THAT THE STORAGE ACCOUNT KEY WILL HAVE TO BE ADDED INTO THE EXTENSIONSCRIPTS JSONS, THEY ARE TAKEN OUT FOR GITLAB UPLOAD
+
+THE STORAGE ACCOUNT USED IN THE JSONS IS THE STORAGE ACCOUNT WHERE THE SHELL SCRIPTS HAVE BEEN UPLOADED TO.
+
+  Fixed script error with -y on the apt-get install commands, still does not boot rstudio for both methods
+
+  VM from template, running each command individually with the "Run command" tab on the VM portal.
+  The contents up to and including the command "sudo apt-get -y install apache2" Work and run as 
+  entering the VM ip address into the browser will open the Apache2 Ubuntu Default Page
+    - This also works using a script extension that includes the same commands
+
+vm seems to clear all changes after commands are run:
+For EXAMPLE:
+
+mkdir rstudio
+ls 
+
+OUTPUTS: 
+rstudio
+script.sh
+stderr
+stdout
+
+then after this is run, if you run ls, the rstudio directory is no longer present. 
+this is due to each code run being in a different directory made specifically for that script to run
+
+even when changing to a static directory, the sudeo gdebi command does not work
+
+having issues with the wget and sudo gdebi commands in order to get rstudio up and running
+
+The shell script works when ssh into vm and running directly
+
+cannot cd ~ in extensions
+
+trying to cd / out of start location then make a new directory and run code there THIS WORKS

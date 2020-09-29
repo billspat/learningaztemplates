@@ -1,0 +1,4 @@
+{
+    "fileUris" : ["https://GITHUBURLHERE/azrunr_script.sh"],
+    "commandToExecute": "sh azrunr_script.sh"
+}
