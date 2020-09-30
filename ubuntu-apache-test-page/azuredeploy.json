@@ -55,6 +55,13 @@
         "description": "Set to True to install PHP."
       }
     },
+    "_customScriptFile": {
+      "type": "string",
+      "metadata": {
+        "description": "The filename of the script in the scripts folder"
+      },
+      "defaultValue": "prepwebserver.sh"
+    },
     "_artifactsLocation": {
       "type": "string",
       "metadata": {
@@ -325,9 +332,9 @@
             "autoUpgradeMinorVersion": true,
             "settings": {
               "fileUris": [
-                "[concat(parameters('_artifactsLocation'), '/', variables('scriptFolder'), '/', variables('serverPrepareScriptFileName'), parameters('_artifactsLocationSasToken'))]"
+                "[concat(parameters('_artifactsLocation'), '/', variables('scriptFolder'), '/', string(parameters('_customScriptFile')), parameters('_artifactsLocationSasToken'))]"
               ],
-              "commandToExecute": "[concat('sh prepwebserver.sh', ' ', string(parameters('installPHP')), ' ', variables('singleQuote'), variables('testPageMarkup'), variables('singleQuote'), ' ', parameters('testPage'), ' ', variables('singleQuote'), parameters('ubuntuOSVersion'), variables('singleQuote'))]"
+              "commandToExecute": "[concat('sh ', string(parameters('_customScriptFile')), ' ', string(parameters('installPHP')), ' ', variables('singleQuote'), variables('testPageMarkup'), variables('singleQuote'), ' ', parameters('testPage'), ' ', variables('singleQuote'), parameters('ubuntuOSVersion'), variables('singleQuote'))]"
             }
           }
         }

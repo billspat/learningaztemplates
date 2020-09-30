@@ -28,6 +28,9 @@
     },
     "_artifactsLocation": {
       "value": "https://raw.githubusercontent.com/billspat/learningaztemplates/master/ubuntu-apache-test-page/"
+    },
+    "_customScriptFile": {
+      "value": "prepwebserver.sh"
     }
   }
 }
