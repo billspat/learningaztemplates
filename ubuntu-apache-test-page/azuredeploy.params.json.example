@@ -30,7 +30,10 @@
       "value": "https://github.com/USER/REPO/tree/master/FOLDER"
     },
     "_customScriptFile": {
-      "value": "prepwebserver.sh"
+      "value": "installrstudio.sh"
+    }, 
+    "userPassword" : {
+      "value": "some password"
     }
 
   }

@@ -20,11 +20,10 @@
       "type": "string",
       "defaultValue": "18.04-LTS",
       "allowedValues": [
-        "16.04.0-LTS",
         "18.04-LTS"
       ],
       "metadata": {
-        "description": "The Ubuntu version for the Web Server VM.  Must be recent.  TODO : add vers 20"
+        "description": "The Ubuntu version for the Web Server VM.  Only one version currentlh allowed as some software depends on version"
       }
     },
     "testPage": {
@@ -48,19 +47,25 @@
         "description": "Test page content body markup."
       }
     },
-    "installPHP": {
-      "type": "bool",
-      "defaultValue": false,
+    "userPassword": {
+      "type": "securestring",
       "metadata": {
-        "description": "Set to True to install PHP."
+        "description": "required parameter - the password for a user in the VM, sent to the custom script "
       }
     },
+    // "installPHP": {
+    //   "type": "bool",
+    //   "defaultValue": false,
+    //   "metadata": {
+    //     "description": "Set to True to install PHP."
+    //   }
+    // },
     "_customScriptFile": {
       "type": "string",
       "metadata": {
         "description": "The filename of the script in the scripts folder"
       },
-      "defaultValue": "prepwebserver.sh"
+      "defaultValue": "installrstudio.sh"
     },
     "_artifactsLocation": {
       "type": "string",
@@ -233,6 +238,19 @@
               "priority": 101,
               "direction": "Inbound"
             }
+          },
+          {
+            "name": "RStudio",
+            "properties": {
+              "priority": 102,
+              "protocol": "Tcp",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourceAddressPrefix": "*",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*",
+              "destinationPortRange": "8787"
+            }
           }
         ]
       }
@@ -334,7 +352,7 @@
               "fileUris": [
                 "[concat(parameters('_artifactsLocation'), '/', variables('scriptFolder'), '/', string(parameters('_customScriptFile')), parameters('_artifactsLocationSasToken'))]"
               ],
-              "commandToExecute": "[concat('sh ', string(parameters('_customScriptFile')), ' ', string(parameters('installPHP')), ' ', variables('singleQuote'), variables('testPageMarkup'), variables('singleQuote'), ' ', parameters('testPage'), ' ', variables('singleQuote'), parameters('ubuntuOSVersion'), variables('singleQuote'))]"
+              "commandToExecute": "[concat('sh ', string(parameters('_customScriptFile')), ' ', string(parameters('userPassword')), ' ', variables('singleQuote'), variables('testPageMarkup'), variables('singleQuote'), ' ', parameters('testPage'), ' ', variables('singleQuote'), parameters('ubuntuOSVersion'), variables('singleQuote'))]"
             }
           }
         }

@@ -9,7 +9,7 @@
       "value": "learningtemplates"
     },
     "ubuntuOSVersion": {
-      "value": "14.04.5-LTS"
+      "value": "18.04-LTS"
     },
     "testPage": {
       "value": "index.html"
@@ -20,9 +20,6 @@
     "testPageBody": {
       "value": "<p>Hello, this is a test page.</p>"
     },
-    "installPHP": {
-      "value": false
-    },
     "adminPasswordOrKey": {
       "value": "SSHKEYOMITTED"
     },
@@ -30,7 +27,11 @@
       "value": "https://raw.githubusercontent.com/billspat/learningaztemplates/master/ubuntu-apache-test-page/"
     },
     "_customScriptFile": {
-      "value": "prepwebserver.sh"
+      "value": "installrstudio.sh"
+    }, 
+    "userPassword" : {
+      "value": "some password"
     }
+
   }
 }
