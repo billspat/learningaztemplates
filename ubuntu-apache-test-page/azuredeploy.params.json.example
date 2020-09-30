@@ -25,6 +25,9 @@
     },
     "adminPasswordOrKey": {
       "value": "GEN-SSH-PUB-KEY"
+    },
+    "_artifactsLocation": {
+      "value": "https://github.com/USER/REPO/tree/master/FOLDER"
     }
   }
 }
