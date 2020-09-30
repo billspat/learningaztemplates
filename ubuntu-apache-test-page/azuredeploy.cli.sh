@@ -14,6 +14,7 @@ usage="azdeploy <rgname> <paramfile>"
 if [ -z "$1" ]
   then
     echo $usage
+    exit 1
 else
   RG=$1
 fi
@@ -21,6 +22,7 @@ fi
 if [ -z "$2" ]
   then
     echo $usage
+    exit 1
 else
   TFILE=$2
 fi
@@ -35,5 +37,5 @@ echo "trying to create deploy group ${DEPLOYGROUP}"
 az deployment group create \
   --name ${DEPLOYGROUP} \
   --resource-group ${RG} \
-  --template-file azure_deploy.json \
+  --template-file azuredeploy.json \
   --parameters @${TFILE}
