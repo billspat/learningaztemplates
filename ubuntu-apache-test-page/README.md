@@ -36,6 +36,7 @@ These are the original instructions from MS.  See below for modified instruction
 2. Edit the new `azuredeploy.params.json` file and replace the values with your own.  For example, replace `GEN-UNIQUE` with a
    unique string.   The server in this template disables password log-ins and requires an SSH key.  You can get one from the 
    Azure portal "cloudshell."  Find the Azure instructions for how to use the Cloud shell, then find out how to use it create an SSSH public /private key pair, and copy the contents of the public key into the `...params.json` file. 
+   Note once in cloudshell, the public key contents are usually show with `cat ~/.ssh/id_rsa.pub`
 3. The "artifacts location" is simply the URL for raw.github... of this repository and folder.  If you copy that to a new repo or folder please update the params.  The _artifact lcoation  param was set to a default value in the template itself (to this repo now)
 4. use the CLI command to deploy: 
 
@@ -57,7 +58,11 @@ Once your test Web server is created use domain name and page name you entered t
 Full URL to the test page will be: http://\<DNS name entered\>.\<resource group location\>.cloudapp.azure.com/\<page name or none for index page\>
 (example: http://mytestserver.westeurope.cloudapp.azure.com)
 
+You can also ssh into the server from the Auzre portal cloudshell.   If the username you set in the params file is the same
+as your Azure account, and the key the same as your Azure public key, in the cloud shell you could 
 
-
+```bash
+ssh $USER@ttp://<dnsNameForPublicIP>.<location>.cloudapp.azure.com
+```
 
 
