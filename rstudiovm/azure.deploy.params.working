@@ -24,7 +24,7 @@
       "value": "SSHKEYOMITTED"
     },
     "_artifactsLocation": {
-      "value": "https://raw.githubusercontent.com/billspat/learningaztemplates/master/ubuntu-apache-test-page/"
+      "value": "https://raw.githubusercontent.com/billspat/learningaztemplates/master/rstudiovm/"
     },
     "_customScriptFile": {
       "value": "installrstudio.sh"
