@@ -1,21 +1,14 @@
 # Ubuntu Apache2 Web server with your test page
 
-![Azure Public Test Date](https://azurequickstartsservice.blob.core.windows.net/badges/ubuntu-apache-test-page/PublicLastTestDate.svg)
-![Azure Public Test Result](https://azurequickstartsservice.blob.core.windows.net/badges/ubuntu-apache-test-page/PublicDeployment.svg)
 
-![Azure US Gov Last Test Date](https://azurequickstartsservice.blob.core.windows.net/badges/ubuntu-apache-test-page/FairfaxLastTestDate.svg)
-![Azure US Gov Last Test Result](https://azurequickstartsservice.blob.core.windows.net/badges/ubuntu-apache-test-page/FairfaxDeployment.svg)
 
-![Best Practice Check](https://azurequickstartsservice.blob.core.windows.net/badges/ubuntu-apache-test-page/BestPracticeResult.svg)
-![Cred Scan Check](https://azurequickstartsservice.blob.core.windows.net/badges/ubuntu-apache-test-page/CredScanResult.svg)
+This template was stolen from the MS Quickstart templates - creates an Ubuntu VM running Apache2 with the test page content you define as a parameter. This can be useful for quick validation/demo/prototyping.
 
-[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fubuntu-apache-test-page%2Fazuredeploy.json)  [![Visualize](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.svg?sanitize=true)](http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fubuntu-apache-test-page%2Fazuredeploy.json)
+## Deploying using the Portal
 
-This template allows you to quickly create an Ubuntu VM running Apache2 with the test page content you define as a parameter. This can be useful for quick validation/demo/prototyping.
+These are the original instructions from MS.  See below for modified instructions using CLI etc. 
 
-## Static Test Page
-
-To deploy a static test page:
+#### To deploy a static test page:
 
 1. Push Deploy to Azure button.
 2. Choose admin credentials for the new Web server.
@@ -24,9 +17,8 @@ To deploy a static test page:
 5. Enter resource group name and location for it.
 6. Start template deployment.
 
-## PHP Test Page
 
-To deploy a PHP test page:
+#### To deploy a PHP test page:
 
 1. Push Deploy to Azure button.
 2. Choose admin credentials for the new Web server.
@@ -35,6 +27,29 @@ To deploy a PHP test page:
 5. Set INSTALLPHP to "true".
 6. Enter resource group name and location for it.
 7. Start template deployment.
+
+
+#### Static page, using CLI
+
+1. copy the file `azuredeploy.params.json.example` to a new file `azuredeploy.params.json`   Files *.params.json are in the 
+   gitignore, but should never be added or checked into git
+2. Edit the new `azuredeploy.params.json` file and replace the values with your own.  For example, replace `GEN-UNIQUE` with a
+   unique string.   The server in this template disables password log-ins and requires an SSH key.  You can get one from the 
+   Azure portal "cloudshell."  Find the Azure instructions for how to use the Cloud shell, then find out how to use it create an SSSH public /private key pair, and copy the contents of the public key into the `...params.json` file. 
+3. The "artifacts location" is simply the URL for raw.github... of this repository and folder.  If you copy that to a new repo or folder please update the params.  The _artifact lcoation  param was set to a default value in the template itself (to this repo now)
+4. use the CLI command to deploy: 
+
+```bash
+RG=< your resource group name>
+TFILE=azuredeploy.params.json
+DEPLOYGROUP=TestUbuntuDeployment
+az deployment group create \
+  --name ${DEPLOYGROUP} \
+  --resource-group ${RG} \
+  --template-file azure_deploy.json \
+  --parameters @${TFILE}
+
+```
 
 ## After Deployment
 
