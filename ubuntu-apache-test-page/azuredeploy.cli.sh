@@ -27,7 +27,8 @@ else
   TFILE=$2
 fi
 
-DEPLOYGROUP=TestUbuntuDeployment
+DEPLOYGROUP=RstudioTestDeploy
+
 echo "trying to delete deploy group ${DEPLOYGROUP}"
 az deployment group delete \
   --name ${DEPLOYGROUP} \

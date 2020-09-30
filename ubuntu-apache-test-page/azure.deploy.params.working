@@ -6,7 +6,7 @@
       "value": "billspat"
     },
     "dnsNameForPublicIP": {
-      "value": "learningtemplates"
+      "value": "ads-rstudio-test"
     },
     "ubuntuOSVersion": {
       "value": "18.04-LTS"
