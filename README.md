@@ -1,6 +1,6 @@
 # Learning Azure Template deployments
 
-The goal of this project is to build VMS in Azure for R/Rstudio using custom script extension
+The objective of this project is to learn and demonstration how to provision  VMS in Azure  for various Research platforms (e.g. R/Rstudio ) using templates and the custom script extension to install features on the VM.  the main goal is to make working with Azure reproducible by provisioning with code ("infrastructure as code") and not with the GUI.    
 
 There are a few folders with various attempts at this. 
 
@@ -13,6 +13,15 @@ There are a few folders with various attempts at this.
   * /rstudiovm : working but needs work
     this template and script currently creates a working vm with Rstudio and a special rstudio user.  See the readme in that folder.  this is based on the really close MS Quickstart template for Ubuntu VM running Apache2.   
 
+
+Learning
+---
+To get started with Templates, I recommend 
+https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-tutorial-create-first-template
+
+We use the "CLI" over powershell as many researchers on on Mac or Linux and bash is available in the [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/about)
+
+Before this though you'll have to [install the Azure CLI tool](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) and Python.   
 
 
 Other quick-starts worth looking into
