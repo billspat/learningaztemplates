@@ -23,7 +23,7 @@ sudo apt-get -y upgrade
 
 # add a regular linux user for Rstudio to work with 
 useradd NEWUSER
-echo "$NEWUSERPASSWORD" | passwd theUsername --stdin
+echo "$NEWUSERPASSWORD" | passwd $NEWUSER --stdin
 
 cd /
 
