@@ -2,18 +2,17 @@
 
 The goal of this project is to build VMS in Azure for R/Rstudio using custom script extension
 
-We started with the LAMP-app quick start template, which uses the Azure Linux CustomScript extension to deploy a LAMP application on Ubuntu. It creates an Ubuntu VM, does a silent install of MySQL, Apache and PHP, then creates a simple PHP script.  Go to /phpinfo.php to see the deployed page. 
+There are a few folders with various attempts at this. 
 
-The following are the original "deploy to azure" buttons for the lamp-app, using the original github links
+  * /colin : not working
+    Colin Williams work for a lab, copied over from a different project and sanitized. These worked in the other project but need some fix up here. 
 
-```
-[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Flamp-app%2Fazuredeploy.json)  
-```
+  * /lampvm : not working
+    We started with the LAMP-app quick start template, which uses the Azure Linux CustomScript extension to deploy a LAMP application on Ubuntu.  See the `/lampvm` folder It creates an Ubuntu VM, does a silent install of MySQL, Apache and PHP, then creates a simple PHP script.  Go to /phpinfo.php to see the deployed page. 
 
+  * /rstudiovm : working but needs work
+    this template and script currently creates a working vm with Rstudio and a special rstudio user.  See the readme in that folder.  this is based on the really close MS Quickstart template for Ubuntu VM running Apache2.   
 
-```
-[![Visualize](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.svg?sanitize=true)](http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Flamp-app%2Fazuredeploy.json)
-```
 
 
 Other quick-starts worth looking into
