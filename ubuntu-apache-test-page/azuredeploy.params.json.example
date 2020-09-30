@@ -28,6 +28,10 @@
     },
     "_artifactsLocation": {
       "value": "https://github.com/USER/REPO/tree/master/FOLDER"
+    },
+    "_customScriptFile": {
+      "value": "prepwebserver.sh"
     }
+
   }
 }
