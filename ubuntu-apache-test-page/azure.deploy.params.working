@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "adminUsername": {
+      "value": "billspat"
+    },
+    "dnsNameForPublicIP": {
+      "value": "learningtemplates"
+    },
+    "ubuntuOSVersion": {
+      "value": "14.04.5-LTS"
+    },
+    "testPage": {
+      "value": "index.html"
+    },
+    "testPageTitle": {
+      "value": "TEST PAGE"
+    },
+    "testPageBody": {
+      "value": "<p>Hello, this is a test page.</p>"
+    },
+    "installPHP": {
+      "value": false
+    },
+    "adminPasswordOrKey": {
+      "value": "SSHKEYOMITTED"
+    },
+    "_artifactsLocation": {
+      "value": "https://raw.githubusercontent.com/billspat/learningaztemplates/master/ubuntu-apache-test-page/"
+    }
+  }
+}
