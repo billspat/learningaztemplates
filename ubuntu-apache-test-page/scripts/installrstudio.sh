@@ -22,8 +22,8 @@ sudo apt-get -y upgrade
 # echo $2 | sudo tee /var/www/html/$3
 
 # add a regular linux user for Rstudio to work with 
-useradd NEWUSER
-echo "$NEWUSERPASSWORD" | passwd $NEWUSER --stdin
+yes `echo $NEWUSERPASSWORD` | useradd $NEWUSER  
+# this is not the same as the admin user set by the Azure template, and is not in the sudoers list.  
 
 cd /
 
@@ -35,9 +35,13 @@ sudo add-apt-repository ppa:marutter/rrutter
 sudo apt update
 
 sudo apt-get -y install r-base
-sudo apt-get -y install apache2
+# I don't think we need apache2
+# sudo apt-get -y install apache2
 sudo apt-get -y install gdebi-core
 
 wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.3.1093-amd64.deb
 
 yes | sudo gdebi rstudio-server-1.3.1093-amd64.deb
+
+# additional packages needed for some R packages
+sudo apt-get install jags
