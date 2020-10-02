@@ -53,13 +53,6 @@
         "description": "required parameter - the password for a user in the VM, sent to the custom script "
       }
     },
-    // "installPHP": {
-    //   "type": "bool",
-    //   "defaultValue": false,
-    //   "metadata": {
-    //     "description": "Set to True to install PHP."
-    //   }
-    // },
     "_customScriptFile": {
       "type": "string",
       "metadata": {
@@ -124,6 +117,11 @@
     "frontEndNSGName": "[concat('rtestnsg', uniqueString(resourceGroup().id, parameters('dnsNameForPublicIP')))]",
     "testPageMarkup": "[concat('<html><head><title>', parameters('testPageTitle'), '</title></head><body>', parameters('testPageBody'), '</body></html>')]",
     "scriptFolder": "scripts",
+    "resourceTags": {
+      "created_by": "[concat(parameters('adminUsername'))]",
+      "project": "templatetesting",
+      "project_id": "[uniqueString(resourceGroup().id)]"
+      },
     "linuxConfiguration": {
       "disablePasswordAuthentication": true,
       "ssh": {
@@ -152,9 +150,7 @@
       "name": "[variables('vhdStorageName')]",
       "apiVersion": "2015-06-15",
       "location": "[parameters('location')]",
-      "tags": {
-        "displayName": "StorageAccount"
-      },
+      "tags": "[variables('resourceTags')]",
       "properties": {
         "accountType": "[variables('vhdStorageType')]"
       }
@@ -164,9 +160,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[parameters('dnsNameForPublicIP')]",
       "location": "[parameters('location')]",
-      "tags": {
-        "displayName": "PublicIPAddress"
-      },
+      "tags": "[variables('resourceTags')]",
       "properties": {
         "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
         "dnsSettings": {
@@ -179,9 +173,7 @@
       "type": "Microsoft.Network/virtualNetworks",
       "name": "[variables('virtualNetworkName')]",
       "location": "[parameters('location')]",
-      "tags": {
-        "displayName": "VirtualNetwork"
-      },
+      "tags": "[variables('resourceTags')]",
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
@@ -203,9 +195,7 @@
       "type": "Microsoft.Network/networkSecurityGroups",
       "name": "[variables('frontEndNSGName')]",
       "location": "[parameters('location')]",
-      "tags": {
-        "displayName": "NSG - Web Server"
-      },
+      "tags": "[variables('resourceTags')]",
       "properties": {
         "securityRules": [
           {
@@ -257,9 +247,7 @@
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('nicName')]",
       "location": "[parameters('location')]",
-      "tags": {
-        "displayName": "NetworkInterface"
-      },
+      "tags": "[variables('resourceTags')]",
       "dependsOn": [
         "[concat('Microsoft.Network/publicIPAddresses/', parameters('dnsNameForPublicIP'))]",
         "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
@@ -290,9 +278,7 @@
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[variables('vmName')]",
       "location": "[parameters('location')]",
-      "tags": {
-        "displayName": "VirtualMachine"
-      },
+      "tags": "[variables('resourceTags')]",
       "dependsOn": [
         "[concat('Microsoft.Storage/storageAccounts/', variables('vhdStorageName'))]",
         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
@@ -337,9 +323,7 @@
           "dependsOn": [
             "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
           ],
-          "tags": {
-            "displayName": "PrepareServer"
-          },
+          "tags": "[variables('resourceTags')]",
           "properties": {
             "publisher": "Microsoft.Azure.Extensions",
             "type": "CustomScript",
