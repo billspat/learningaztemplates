@@ -22,7 +22,7 @@ sudo apt-get -y upgrade
 # echo $2 | sudo tee /var/www/html/$3
 
 # add a regular linux user for Rstudio to work with 
-yes `echo $NEWUSERPASSWORD` | useradd $NEWUSER  
+yes `echo $NEWUSERPASSWORD` | sudo useradd $NEWUSER  -d /home/$NEWUSER
 # this is not the same as the admin user set by the Azure template, and is not in the sudoers list.  
 
 cd /
