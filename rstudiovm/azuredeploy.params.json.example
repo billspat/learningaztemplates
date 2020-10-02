@@ -11,18 +11,6 @@
     "ubuntuOSVersion": {
       "value": "14.04.5-LTS"
     },
-    "testPage": {
-      "value": "index.html"
-    },
-    "testPageTitle": {
-      "value": "TEST PAGE"
-    },
-    "testPageBody": {
-      "value": "<p>Hello, this is a test page.</p>"
-    },
-    "installPHP": {
-      "value": false
-    },
     "adminPasswordOrKey": {
       "value": "GEN-SSH-PUB-KEY"
     },
@@ -34,6 +22,15 @@
     }, 
     "userPassword" : {
       "value": "some password"
+    },
+    "storageAccount": {
+      "value": "STORAGEACCOUNTNAME"
+    },
+    "storageContainer": {
+      "value": "STORAGECONTAINERNAME"
+    },
+    "storageKey": {
+      "value": "STORAGEKEY"
     }
 
   }
