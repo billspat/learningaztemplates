@@ -24,10 +24,24 @@ if [ -z "$2" ]
     echo $usage
     exit 1
 else
-  TFILE=$2
+  PFILE=$2
 fi
 
-DEPLOYGROUP=RstudioTestDeploy
+if [ -z "$3" ]
+  then 
+    TFILE=azuredeploy.json
+else
+    TFILE="$3"
+fi
+
+if [ -z "$4" ]
+  then 
+    DEPLOYGROUP=RstudioTestDeploy
+
+else
+    DEPLOYGROUP=$4
+fi
+
 
 echo "trying to delete deploy group ${DEPLOYGROUP}"
 az deployment group delete \
@@ -38,5 +52,5 @@ echo "trying to create deploy group ${DEPLOYGROUP}"
 az deployment group create \
   --name ${DEPLOYGROUP} \
   --resource-group ${RG} \
-  --template-file azuredeploy.json \
-  --parameters @${TFILE}
+  --template-file $TFILE \
+  --parameters @${PFILE}
