@@ -1,29 +1,36 @@
 #!/bin/bash
 
-NEWUSER=rstudio
-NEWUSERPASSWORD=$1
+export NEWUSER=rstudio
+export NEWUSERPASSWORD=$1
+export AZURE_STORAGE_ACCOUNT=$2
+export AZURE_CONTAINER=$3
+export AZURE_STORAGE_ACCESS_KEY=$4
 
 sudo apt-get update
 sudo apt-get -y upgrade
 
-# this was from  a quickstart script from Microsoft.  I'm keeping it here for ref, but  pls delete
-# sudo apt-get install -y apache2
-# if [ "$1" = "True" ]; then
-# 	if [ "$4" = "16.04.0-LTS" ]; then
-# 		sudo apt-get install -y libapache2-mod-php
-# 	else
-# 		sudo apt-get install -y php5
-# 	fi
-# 	if [ "$3" = "index.php" ]; then
-# 		sudo rm /var/www/html/index.html
-# 	fi
-# 	sudo service apache2 restart
-# fi
-# echo $2 | sudo tee /var/www/html/$3
-
 # add a regular linux user for Rstudio to work with 
 yes `echo $NEWUSERPASSWORD` | sudo useradd $NEWUSER  -d /home/$NEWUSER
 # this is not the same as the admin user set by the Azure template, and is not in the sudoers list.  
+
+
+
+sudo su
+
+wget https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+sudo apt-get update
+sudo apt-get -y install blobfuse fuse
+
+export MOUNTDIR=/mnt/$AZURE_CONTAINER
+export FUSETMP=/mnt/blobfusetmp
+mkdir $MOUNTDIR
+chown $NEWUSER $MOUNTDIR 
+chmod a+rw $FUSETMP
+
+blobfuse /mnt/$MOUNTDIR --container-name=$AZURE_CONTAINER --tmp-path=$FUSETMP
+ln -s $MOUNTDIR /home/$NEWUSER/$AZURE_CONTAINER
+chown $NEWUSER /home/$NEWUSER/$AZURE_CONTAINER 
 
 cd /
 
