@@ -82,4 +82,4 @@ sudo wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.3.1
 yes | sudo gdebi rstudio-server-1.3.1093-amd64.deb
 
 # additional dependencies for packages needed for some R packages
-Rscript -e "install.packages(c('renv','tidyverse','jagsui')"  # a package manager
+Rscript -e "install.packages(c('renv','tidyverse','jagsui'))"  # a package manager
