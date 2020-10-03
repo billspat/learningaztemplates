@@ -67,8 +67,9 @@ sudo chown $USER $HOME/$AZURE_CONTAINER
 
 # taken from https://rstudio.com/products/rstudio/download-server/debian-ubuntu/
 
-# mkdir rstudiostartup
-# cd rstudiostartup
+mkdir ~/rstudiostartup
+cd rstudiostartup
+
 sudo add-apt-repository ppa:marutter/rrutter
 sudo apt update
 
