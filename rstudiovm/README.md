@@ -56,7 +56,7 @@ az deployment group create \
 
 Once your test Web server is created use domain name and page name you entered to access the Web page with your markup. 
 Full URL to the test page will be: http://\<DNS name entered\>.\<resource group location\>.cloudapp.azure.com/\<page name or none for index page\>
-(example: http://mytestserver.westeurope.cloudapp.azure.com)
+(example: http://ads-rstudio-test.centralus.cloudapp.azure.com)
 
 You can also ssh into the server from the Auzre portal cloudshell.   If the username you set in the params file is the same
 as your Azure account, and the key the same as your Azure public key, in the cloud shell you could 
