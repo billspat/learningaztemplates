@@ -97,24 +97,33 @@
       "metadata": {
         "description": "key for the storage to be mounted using blobfuse in custom script"
       }
+    },
+    "namePrefix": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue":  "rstudioDeployment",
+      "metadata": {
+        "description" : "A naming prefix used for all resources created within this deployment"
+      }
     }
   },
   "variables": {
     "imagePublisher": "Canonical",
     "imageOffer": "UbuntuServer",
-    "nicName": "[concat('rtest-', parameters('dnsNameForPublicIP'), '-', uniqueString(resourceGroup().id))]",
+    "nicName": "[concat(parameters('namePrefix'), parameters('dnsNameForPublicIP'), '-', uniqueString(resourceGroup().id))]",
     "addressPrefix": "10.0.0.0/16",
     "subnetName": "Subnet",
     "subnetPrefix": "10.0.0.0/24",
+    "publicIPAdressName": "[concat(parameters('namePrefix'), parameters('dnsNameForPublicIP'))]",
     "vhdStorageType": "Standard_LRS",
     "publicIPAddressType": "Dynamic",
-    "vmName": "[concat('rtest-', parameters('dnsNameForPublicIP'), '-', uniqueString(resourceGroup().id))]",
+    "vmName": "[concat(parameters('namePrefix'), parameters('dnsNameForPublicIP'), '-', uniqueString(resourceGroup().id))]",
     "vmSize": "Standard_D2_v2",
-    "virtualNetworkName": "[concat('rtestvnet', uniqueString(resourceGroup().id, parameters('dnsNameForPublicIP')))]",
+    "virtualNetworkName": "[concat(parameters('namePrefix'), uniqueString(resourceGroup().id, parameters('dnsNameForPublicIP')))]",
     "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'),  variables('subnetName'))]",
-    "vhdStorageName": "[concat('rtestvhd', uniqueString(resourceGroup().id))]",
+    "vhdStorageName": "[concat(take(parameters('namePrefix'), 11), uniqueString(resourceGroup().id))]",
     "singleQuote": "'",
-    "frontEndNSGName": "[concat('rtestnsg', uniqueString(resourceGroup().id, parameters('dnsNameForPublicIP')))]",
+    "frontEndNSGName": "[concat(parameters('namePrefix'), uniqueString(resourceGroup().id, parameters('dnsNameForPublicIP')))]",
     "scriptFolder": "scripts",
     "resourceTags": {
       "created_by": "[concat(parameters('adminUsername'))]",
@@ -136,7 +145,7 @@
   "outputs": {
     "fqdn": {
       "type": "string",
-      "value": "[reference(parameters('dnsNameForPublicIP')).dnsSettings.fqdn]"
+      "value": "[reference(variables('publicIPAdressName')).dnsSettings.fqdn]"
     }
   },
   "resources": [
@@ -153,7 +162,7 @@
     {
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[parameters('dnsNameForPublicIP')]",
+      "name": "[variables('publicIPAdressName')]",
       "location": "[parameters('location')]",
       "tags": "[variables('resourceTags')]",
       "properties": {
@@ -244,7 +253,7 @@
       "location": "[parameters('location')]",
       "tags": "[variables('resourceTags')]",
       "dependsOn": [
-        "[concat('Microsoft.Network/publicIPAddresses/', parameters('dnsNameForPublicIP'))]",
+        "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAdressName'))]",
         "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
         "[concat('Microsoft.Network/networkSecurityGroups/', variables('frontEndNSGName'))]"
       ],
@@ -255,7 +264,7 @@
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('dnsNameForPublicIP'))]"
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAdressName'))]"
               },
               "subnet": {
                 "id": "[variables('subnetRef')]"
