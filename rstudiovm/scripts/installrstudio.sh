@@ -2,15 +2,27 @@
 
 # azure vm setup script.  adds blobfuse connection for current user, which must be in sudoers
 
- #--- params 
-export USERPASSWORD=$1  # password for the admin user sent by template, which uses ssh key
-export AZURE_STORAGE_ACCOUNT=$2
-export AZURE_CONTAINER=$3
-export AZURE_STORAGE_ACCESS_KEY=$4
+#===  expected params 
+export USERID=$1
+export USERPASSWORD=$2  # password for the admin user sent by template, which uses ssh key
+export AZURE_STORAGE_ACCOUNT=$3
+export AZURE_CONTAINER=$4
+export AZURE_STORAGE_ACCESS_KEY=$5
 
-# ------
-yes $USERPASSWORD | sudo passwd $USER
 
+#======USER======
+export $HOME=/home/$USERID
+
+# if the user id does not exist yet, create it
+if id "$USERID" &>/dev/null; then
+    echo "$USERID exists"
+else
+    sudo useradd $USERID -m 
+fi
+
+yes $USERPASSWORD | sudo passwd $USERID
+
+#====system update=====
 # TODO combine these operations with the apt-get updates below
 sudo apt-get update
 sudo apt-get -y upgrade
@@ -46,8 +58,8 @@ sudo chown $USER $BFCONFIGFILE
 sudo chmod 600 $BFCONFIGFILE  # only for this user
 
 sudo mkdir -p $MOUNTDIR
-sudo chown $USER $MOUNTDIR 
-sudo chown $USER $FUSETMP 
+sudo chown $USERID $MOUNTDIR 
+sudo chown $USERID $FUSETMP 
 
 # run as current user.  that measn this mount only works with the current user
 
@@ -58,7 +70,7 @@ blobfuse $MOUNTDIR --tmp-path=/mnt/blobfusetmp \
 # blobfuse /mnt/$MOUNTDIR --container-name=$AZURE_CONTAINER --tmp-path=$FUSETMP
 # add the /mnt dir as a short cut in the user home dir for easy access via rstudio
 sudo ln -s $MOUNTDIR $HOME/$AZURE_CONTAINER
-sudo chown $USER $HOME/$AZURE_CONTAINER
+sudo chown $USERID $HOME/$AZURE_CONTAINER
 
 
 

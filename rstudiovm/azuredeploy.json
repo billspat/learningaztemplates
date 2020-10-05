@@ -337,7 +337,7 @@
               "fileUris": [
                 "[concat(parameters('_artifactsLocation'), '/', variables('scriptFolder'), '/', string(parameters('_customScriptFile')), parameters('_artifactsLocationSasToken'))]"
               ],
-              "commandToExecute": "[concat('sh ', string(parameters('_customScriptFile')), ' ', string(parameters('userPassword')), ' ', variables('singleQuote'), string(parameters('storageAccount')), variables('singleQuote'), ' ', variables('singleQuote'), string(parameters('storageContainer')), variables('singleQuote'),' ', variables('singleQuote'), string(parameters('storageKey')), variables('singleQuote'))]"
+              "commandToExecute": "[concat('sh ', string(parameters('_customScriptFile')), ' ', string(parameters('adminUsername')), ' ', string(parameters('userPassword')), ' ', variables('singleQuote'), string(parameters('storageAccount')), variables('singleQuote'), ' ', variables('singleQuote'), string(parameters('storageContainer')), variables('singleQuote'),' ', variables('singleQuote'), string(parameters('storageKey')), variables('singleQuote'))]"
             }
           }
         }
