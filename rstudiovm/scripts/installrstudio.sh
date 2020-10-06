@@ -37,42 +37,63 @@ cd /usr/local/src
 #  Just a note - blobfuse needs to store the entire file contents on the disk while the file is open. If you don't have space, things will stop working.
 # this is terrible if the container is large, then this is not a good solution for a remote disk 
 
+## install
 sudo wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 sudo apt-get update
 sudo apt-get -y install blobfuse fuse
 
-export MOUNTDIR=/mnt/$AZURE_CONTAINER
+# main mount point 
+export FUSEMOUNT=/mnt/$AZURE_CONTAINER
+
 export FUSETMP=/mnt/blobfusetmp
 
+##  optional use RAM disk for blobfuse buffer performance if needed
+# see https://docs.microsoft.com/en-us/azure/storage/blobs/storage-how-to-mount-container-linux
+# sudo mkdir -p /mnt/ramdisk
+# sudo mount -t tmpfs -o size=16g tmpfs /mnt/ramdisk
+# sudo mkdir -p /mnt/ramdisk/blobfusetmp
+# sudo chown $USERID /mnt/ramdisk/blobfusetmp
+# export FUSETMP=/mnt/ramdisk/blobfusetmp
+
+sudo mkdir -p $FUSEMOUNT
+sudo mkdir -p $FUSETMP
+
+
 # create the config file that we'll use for blob fuse
-echo -e "accountName $AZURE_STORAGE_ACCOUNT \naccountKey $AZURE_STORAGE_ACCESS_KEY \ncontainerName $AZURE_CONTAINER" > $HOME/bfconfig
+echo -e "accountName $AZURE_STORAGE_ACCOUNT \naccountKey $AZURE_STORAGE_ACCESS_KEY \ncontainerName $AZURE_CONTAINER" > /tmp/bfconfig
 
-export BFCONFIGFILE=/etc/blobfuse/${USER}config  
+# create the mounting script
 
-sudo mkdir /etc/blobfuse  # use basedir here 
+export BFCONFIGFILE=/etc/blobfuse/${USERID}config  
+
+sudo mkdir -p /etc/blobfuse  # use basedir here 
 sudo chmod a+r /etc/blobfuse
 
-sudo mv ~/bfconfig $BFCONFIGFILE
-sudo chown $USER $BFCONFIGFILE
+sudo mv /tmp/bfconfig $BFCONFIGFILE
+sudo chown $USERID $BFCONFIGFILE
 sudo chmod 600 $BFCONFIGFILE  # only for this user
 
-sudo mkdir -p $MOUNTDIR
-sudo chown $USERID $MOUNTDIR 
+sudo chown $USERID $FUSEMOUNT 
 sudo chown $USERID $FUSETMP 
 
+echo "#!/bin/bash" | sudo tee -a /usr/bin//blobmount.sh
+echo "blobfuse \$1 --tmp-path=$FUSETMP --use-attr-cache=true -o attr_timeout=240 -o entry_timeout=240 -o negative_timeout=120 --config-file=$BFCONFIGFILE" \
+  | sudo tee -a /usr/bin//blobmount.sh
+
+sudo chmod a+rx /usr/bin/blobmount.sh
+echo  "blobmount.sh $FUSEMOUNT fuse defaults,_netdev 0 0" > sudo tee -a /etc/fstab
+sudo mount -a
 # run as current user.  that measn this mount only works with the current user
 
-blobfuse $MOUNTDIR --tmp-path=/mnt/blobfusetmp \
-   -o attr_timeout=240 -o entry_timeout=240 -o negative_timeout=120 \
-   --config-file=$BFCONFIGFILE
+# blobfuse $FUSEMOUNT --tmp-path=$FUSETMP \
+#    -o attr_timeout=240 -o entry_timeout=240 -o negative_timeout=120 \
+#    --config-file=$BFCONFIGFILE
 
 # blobfuse /mnt/$MOUNTDIR --container-name=$AZURE_CONTAINER --tmp-path=$FUSETMP
 # add the /mnt dir as a short cut in the user home dir for easy access via rstudio
-sudo ln -s $MOUNTDIR $HOME/$AZURE_CONTAINER
-sudo chown $USERID $HOME/$AZURE_CONTAINER
-
-
+sudo ln -s $FUSEMOUNT $USERHOME/$AZURE_CONTAINER
+sudo chown $USERID $USERHOME/$AZURE_CONTAINER
 
 #===== R & Rstudio ======
 
