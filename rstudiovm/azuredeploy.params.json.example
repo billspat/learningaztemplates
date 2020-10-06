@@ -37,6 +37,9 @@
     },
     "namePrefix": {
       "value" : "SHORTSTRING"
+    },
+    "cpuSize" : {
+      "value" : "CPU-16GB"
     }
 
   }

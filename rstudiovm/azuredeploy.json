@@ -108,9 +108,24 @@
     "namePrefix": {
       "type": "string",
       "minLength": 1,
-      "defaultValue":  "rstudioDeployment",
+      "defaultValue": "rstudioDeployment",
       "metadata": {
-        "description" : "A naming prefix used for all resources created within this deployment"
+        "description": "A naming prefix used for all resources created within this deployment"
+      }
+    },
+    "cpuSize": {
+      "type": "string",
+      "defaultValue": "CPU-8GB",
+      "allowedValues": [
+        "CPU-4GB",
+        "CPU-7GB",
+        "CPU-8GB",
+        "CPU-14GB",
+        "CPU-16GB",
+        "GPU-56GB"
+      ],
+      "metadata": {
+        "description": "Choose between CPU or GPU processing"
       }
     }
   },
@@ -125,7 +140,14 @@
     "vhdStorageType": "Standard_LRS",
     "publicIPAddressType": "Dynamic",
     "vmName": "[concat(parameters('namePrefix'), parameters('dnsNameForPublicIP'), '-', uniqueString(resourceGroup().id))]",
-    "vmSize": "Standard_D2_v2",
+    "vmSize": {
+      "CPU-4GB": "Standard_B2s",
+      "CPU-7GB": "Standard_DS2_v2",
+      "CPU-8GB": "Standard_D2s_v3",
+      "CPU-14GB": "Standard_DS3_v2",
+      "CPU-16GB": "Standard_D4s_v3",
+      "GPU-56GB": "Standard_NC6_Promo"
+    },
     "virtualNetworkName": "[concat(parameters('namePrefix'), uniqueString(resourceGroup().id, parameters('dnsNameForPublicIP')))]",
     "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'),  variables('subnetName'))]",
     "vhdStorageName": "[concat(take(parameters('namePrefix'), 11), uniqueString(resourceGroup().id))]",
@@ -296,7 +318,7 @@
       ],
       "properties": {
         "hardwareProfile": {
-          "vmSize": "[variables('vmSize')]"
+          "vmSize": "[variables('vmSize')[parameters('cpuSize')]]"
         },
         "osProfile": {
           "computerName": "[variables('vmName')]",
