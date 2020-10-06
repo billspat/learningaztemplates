@@ -6,7 +6,14 @@
       "type": "string",
       "minLength": 1,
       "metadata": {
-        "description": "User name for the Web Server VM."
+        "description": "User name for the ssh admin /sudo access."
+      }
+    },
+    "webUsername": {
+      "type": "string",
+      "minLength": 1,
+      "metadata": {
+        "description": "User name for the Web Server login."
       }
     },
     "dnsNameForPublicIP": {
@@ -337,7 +344,7 @@
               "fileUris": [
                 "[concat(parameters('_artifactsLocation'), '/', variables('scriptFolder'), '/', string(parameters('_customScriptFile')), parameters('_artifactsLocationSasToken'))]"
               ],
-              "commandToExecute": "[concat('sh ', string(parameters('_customScriptFile')), ' ', string(parameters('adminUsername')), ' ', string(parameters('userPassword')), ' ', variables('singleQuote'), string(parameters('storageAccount')), variables('singleQuote'), ' ', variables('singleQuote'), string(parameters('storageContainer')), variables('singleQuote'),' ', variables('singleQuote'), string(parameters('storageKey')), variables('singleQuote'))]"
+              "commandToExecute": "[concat('sh ', string(parameters('_customScriptFile')), ' ', string(parameters('webUsername')), ' ', string(parameters('userPassword')), ' ', variables('singleQuote'), string(parameters('storageAccount')), variables('singleQuote'), ' ', variables('singleQuote'), string(parameters('storageContainer')), variables('singleQuote'),' ', variables('singleQuote'), string(parameters('storageKey')), variables('singleQuote'))]"
             }
           }
         }

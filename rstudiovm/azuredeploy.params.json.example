@@ -5,6 +5,9 @@
     "adminUsername": {
       "value": "GEN-UNIQUE"
     },
+    "webUsername" : {
+      "value": "GEN-UNIQUE"
+    },
     "dnsNameForPublicIP": {
       "value": "GEN-UNIQUE"
     },
@@ -31,6 +34,9 @@
     },
     "storageKey": {
       "value": "STORAGEKEY"
+    },
+    "namePrefix": {
+      "value" : "SHORTSTRING"
     }
 
   }

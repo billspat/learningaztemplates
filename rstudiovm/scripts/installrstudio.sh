@@ -11,14 +11,14 @@ export AZURE_STORAGE_ACCESS_KEY=$5
 
 
 #======USER======
-export HOME=/home/$USERID
+export USERHOME=/home/$USERID
 
 # if the user id does not exist yet, create it
-if id "$USERID" &>/dev/null; then
-    echo "$USERID exists"
-else
-    sudo useradd $USERID -m 
-fi
+#if id "$USERID" &>/dev/null; then
+#    echo "$USERID exists"
+#else
+sudo useradd $USERID -m 
+#fi
 
 yes $USERPASSWORD | sudo passwd $USERID
 
