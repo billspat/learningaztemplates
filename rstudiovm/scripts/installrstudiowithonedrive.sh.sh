@@ -112,9 +112,3 @@ sudo apt -y install libnotify-dev
 
 source ~/dlang/dmd-2.094.0/activate
 
-git clone https://github.com/abraunegg/onedrive.git
-cd onedrive
-./configure
-make clean; make;
-sudo make install
-
