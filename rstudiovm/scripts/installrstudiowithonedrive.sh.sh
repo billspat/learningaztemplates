@@ -99,7 +99,7 @@ Rscript -e "install.packages(c('renv','tidyverse','jagsui'))"  # a package manag
 #===== OneDrive ======
 
 cd /
-export HOME=/
+
 sudo apt install build-essential
 sudo apt install libcurl4-openssl-dev
 sudo apt install libsqlite3-dev
@@ -110,5 +110,15 @@ curl -fsS https://dlang.org/install.sh | bash -s dmd
 
 sudo apt -y install libnotify-dev
 
-source ~/dlang/dmd-2.094.0/activate
+sudo su
+
+source dlang/dmd-2.094.1/activate
+
+git clone https://github.com/abraunegg/onedrive.git
+cd onedrive
+./configure
+make clean; make;
+sudo make install
+
+exit
 
