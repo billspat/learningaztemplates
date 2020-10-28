@@ -99,7 +99,7 @@ Rscript -e "install.packages(c('renv','tidyverse','jagsui'))"  # a package manag
 #===== OneDrive ======
 
 cd /
-
+export HOME=/
 sudo apt install build-essential
 sudo apt install libcurl4-openssl-dev
 sudo apt install libsqlite3-dev
