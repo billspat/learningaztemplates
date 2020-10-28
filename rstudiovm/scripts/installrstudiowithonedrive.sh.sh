@@ -108,17 +108,17 @@ sudo apt install git
 sudo apt install curl
 curl -fsS https://dlang.org/install.sh | bash -s dmd
 
-sudo apt -y install libnotify-dev
+#sudo apt -y install libnotify-dev
 
-sudo su
+#sudo su
 
-source dlang/dmd-2.094.1/activate
+#source dlang/dmd-2.094.1/activate
 
-git clone https://github.com/abraunegg/onedrive.git
-cd onedrive
-./configure
-make clean; make;
-sudo make install
+#git clone https://github.com/abraunegg/onedrive.git
+#cd onedrive
+#./configure
+#make clean; make;
+#sudo make install
 
-exit
+#exit
 
