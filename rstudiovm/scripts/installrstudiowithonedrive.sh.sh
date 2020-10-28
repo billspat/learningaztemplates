@@ -106,19 +106,25 @@ sudo apt install libsqlite3-dev
 sudo apt install pkg-config
 sudo apt install git
 sudo apt install curl
-curl -fsS https://dlang.org/install.sh | bash -s dmd
+#curl -fsS https://dlang.org/install.sh | bash -s dmd
+curl -fsS https://dlang.org/install.sh | bash -s ldc
 
 sudo apt -y install libnotify-dev
 
-sudo chmod +rwx dlang/dmd-2.094.1
-sudo chmod +x dlang/dmd-2.094.1/activate
+#sudo chmod +rwx dlang/dmd-2.094.1
+#sudo chmod +x dlang/dmd-2.094.1/activate
 
-./dlang/dmd-2.094.1/activate
+#./dlang/dmd-2.094.1/activate
+
+#git clone https://github.com/abraunegg/onedrive.git
+#cd onedrive
+#./configure
+#make clean; make;
+#sudo make install
 
 git clone https://github.com/abraunegg/onedrive.git
 cd onedrive
-./configure
-make clean; make;
+./configure DC=~/ldc2-1.16.0-linux-aarch64/bin/ldmd2
+make clean; make
 sudo make install
-
 
