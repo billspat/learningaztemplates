@@ -112,7 +112,7 @@ sudo apt -y install libnotify-dev
 
 sudo su
 
-source dlang/dmd-2.094.1/activate
+.dlang/dmd-2.094.1/activate
 
 #git clone https://github.com/abraunegg/onedrive.git
 #cd onedrive
