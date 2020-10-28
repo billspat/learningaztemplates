@@ -110,7 +110,8 @@ curl -fsS https://dlang.org/install.sh | bash -s dmd
 
 sudo apt -y install libnotify-dev
 
-sudo su
+sudo chmod +rwx dlang/dmd-2.094.1
+sudo chmod +x dlang/dmd-2.094.1/activate
 
 ./dlang/dmd-2.094.1/activate
 
