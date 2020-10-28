@@ -115,11 +115,10 @@ sudo chmod +x dlang/dmd-2.094.1/activate
 
 ./dlang/dmd-2.094.1/activate
 
-#git clone https://github.com/abraunegg/onedrive.git
-#cd onedrive
-#./configure
-#make clean; make;
-#sudo make install
+git clone https://github.com/abraunegg/onedrive.git
+cd onedrive
+./configure
+make clean; make;
+sudo make install
 
-#exit
 
