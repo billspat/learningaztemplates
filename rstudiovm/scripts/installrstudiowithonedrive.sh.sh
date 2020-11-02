@@ -124,7 +124,7 @@ sudo apt -y install libnotify-dev
 sudo chmod +rwx dlang/ldc-1.24.0
 git clone https://github.com/abraunegg/onedrive.git
 cd onedrive
-./configure DC=//dlang/ldc2-1.24.0-linux-aarch64/bin/ldmd2
+./configure DC=//dlang/ldc2-1.24.0/bin/ldmd2
 make clean; make
 sudo make install
 
