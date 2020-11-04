@@ -125,7 +125,8 @@ sudo chmod +rwx dlang/ldc-1.24.0
 git clone https://github.com/abraunegg/onedrive.git
 mv dlang /home/will3298/
 cd onedrive
-./configure DC=~/dlang/ldc-1.24.0/bin/ldmd2
+export HOME=/home/will3298
+sudo ./configure DC=~/dlang/ldc-1.24.0/bin/ldmd2
 make clean; make
 sudo make install
 
