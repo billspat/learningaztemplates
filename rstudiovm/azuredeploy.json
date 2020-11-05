@@ -127,7 +127,13 @@
       "metadata": {
         "description": "Choose between CPU or GPU processing"
       }
+    },
+    "timeStamp" : {
+      "type": "string",
+      "defaultValue": "[utcNow()]",
+      "metadata" : { "description" : "timestamp to be used for random values"}
     }
+    
   },
   "variables": {
     "imagePublisher": "Canonical",
@@ -157,7 +163,7 @@
     "resourceTags": {
       "created_by": "[concat(parameters('adminUsername'))]",
       "project": "templatetesting",
-      "project_id": "[uniqueString(resourceGroup().id)]"
+      "deployment_tag": "[concat(parameters('namePrefix'),parameters('timeStamp'))]"
       },
     "linuxConfiguration": {
       "disablePasswordAuthentication": true,
