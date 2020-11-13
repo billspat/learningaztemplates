@@ -12,7 +12,7 @@
       "value": "GEN-UNIQUE"
     },
     "ubuntuOSVersion": {
-      "value": "14.04.5-LTS"
+      "value": "20_04-lts-gen2"
     },
     "adminPasswordOrKey": {
       "value": "GEN-SSH-PUB-KEY"
