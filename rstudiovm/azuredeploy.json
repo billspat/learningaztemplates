@@ -25,10 +25,11 @@
     },
     "ubuntuOSVersion": {
       "type": "string",
-      "defaultValue": "20.04-LTS",
+      "defaultValue": "20.04-lts",
       "allowedValues": [
         "18.04-LTS",
-        "20_04-lts-gen2"
+        "20_04-lts",
+        "20_04-daily-lts-gen2"
       ],
       "metadata": {
         "description": "The Ubuntu version for the Web Server VM.  Only one version currentlh allowed as some software depends on version"
@@ -137,10 +138,11 @@
     
   },
   "variables": {
-    "imagePublisher": "canonical",
+    "imagePublisher": "Canonical",
     "imageOffers":{
       "18.04-LTS": "UbuntuServer",
-      "20_04-lts-gen2": "0001-com-ubuntu-server-focal-daily"
+      "20_04-lts": "0001-com-ubuntu-server-focal",
+      "20_04-daily-lts-gen2": "0001-com-ubuntu-server-focal-daily"
     },
     "nicName": "[concat(parameters('namePrefix'), parameters('dnsNameForPublicIP'), '-', uniqueString(resourceGroup().id))]",
     "addressPrefix": "10.0.0.0/16",
