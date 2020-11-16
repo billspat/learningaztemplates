@@ -9,6 +9,9 @@ export AZURE_STORAGE_ACCOUNT=$3
 export AZURE_CONTAINER=$4
 export AZURE_STORAGE_ACCESS_KEY=$5
 
+#========FIX DNS
+# UBUNTU servers not found in azure
+echo "nameserver 8.8.8.8" | tee /etc/resolvconf/resolv.conf.d/base > /dev/null
 
 #======USER======
 export USERHOME=/home/$USERID
