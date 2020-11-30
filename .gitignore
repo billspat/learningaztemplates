@@ -2,4 +2,3 @@ testparams.json
 # keep ALL params out of github
 # if you want a params file example, use *.params.json.example
 *.params.json
-rstudiovm/rparams.R
