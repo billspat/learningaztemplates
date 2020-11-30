@@ -29,6 +29,7 @@ yes $USERPASSWORD | sudo passwd $USERID
 # TODO combine these operations with the apt-get updates below
 sudo apt-get update
 sudo apt-get -y upgrade
+sudo apt-get update
 
 # Linux packages needed for tidyverse and Jags R packages
 sudo apt-get -y install libxml2-dev  libssl-dev libcurl4-openssl-dev jags

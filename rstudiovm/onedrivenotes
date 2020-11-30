@@ -1,0 +1,27 @@
+The following commands will allow for files stored on OneDrive to be accessed by the current virtual machine
+
+To login to OneDrive, run the following command:
+onedrive
+
+Then, copy and navigate to the link that is provided, once signed in to an account, paste the URI of the page as directed by the terminal.
+
+To do a one-time synchronization of a directory within onedrive, use the following command:
+onedrive --synchronize --single-directory '<dir_name>' --syncdir '<dir_name>'
+the --single-directory parameter is the name of the directory within onedrive, the syncdir parameter is the location that directory will be synchronized to
+on the VM
+
+In order to maintain synchronization between VM files and onedrive files, use the following command:
+onedrive --monitor --single-directory '<dir_name>' --syncdir '<dir_name>' --monitor-interval <seconds>
+the --single-directory parameter is the name of the directory within onedrive, the syncdir parameter is the location that directory will be synchronized to
+on the VM, the --monitor-interval parameter is the duration between automatic synchronizations
+NOTE: this will synchronize every time a file is saved, or the --monitor-interval amount of seconds has passed.
+NOTE: this will keep the terminal busy for as long as it is running, this can be stopped by running ctrl+C in the command line
+
+
+HELP RESOURCES
+In the terminal, run the command as follows:
+onedrive -h
+This will display the possible commands to run in the terminal
+
+For more information, visit:
+https://github.com/abraunegg/onedrive/blob/master/docs/USAGE.md
